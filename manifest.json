@@ -1,0 +1,12 @@
+{
+  "name": "Nuestra Carta - Romance PWA",
+  "short_name": "CartaRomántica",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#fff7fb",
+  "theme_color": "#ff6f9a",
+  "icons": [
+    { "src": "icons/icon-192.svg", "type": "image/svg+xml", "sizes": "192x192" },
+    { "src": "icons/icon-512.svg", "type": "image/svg+xml", "sizes": "512x512" }
+  ]
+}

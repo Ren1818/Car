@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nuestra Carta — Romance PWA</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <meta name="theme-color" content="#ffe6f0" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Nuestra Carta</h1>
+      <p class="subtitle">Haz clic en el sello para abrir el sobre y leer la carta.</p>
+    </header>
+
+    <section class="envelope-area">
+      <div class="envelope" id="envelope" aria-hidden="false">
+        <div class="flap" id="flap"></div>
+        <div class="body">
+          <div class="seal" id="seal" title="Abrir carta" role="button" tabindex="0">❤</div>
+        </div>
+      </div>
+
+      <article class="letter hidden" id="letter" aria-hidden="true">
+        <div class="letter-content" id="letterContent" tabindex="0">
+          <h2>Mi amor,</h2>
+          <p>
+            Aquí empieza la carta. Puedes leer todo el mensaje haciendo scroll.
+            Este texto es un ejemplo para mostrar el comportamiento de desplazamiento.
+          </p>
+
+          <p id="longText">
+            (Texto de ejemplo. Reemplázalo por tu mensaje real.)
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+            posuere, mauris ut gravida porttitor, risus risus fermentum lorem,
+            sit amet efficitur mi nibh vitae magna. Sed feugiat dictum mi, at
+            dictum mi efficitur in. Pellentesque habitant morbi tristique
+            senectus et netus et malesuada fames ac turpis egestas. ...
+          </p>
+        </div>
+        <button class="close-letter" id="closeLetter">Cerrar</button>
+      </article>
+    </section>
+
+    <section class="player-area">
+      <h3>Música de fondo</h3>
+
+      <div class="player">
+        <audio id="audio" src="/assets/default-music.mp3" preload="auto" loop></audio>
+
+        <div class="controls">
+          <button id="playPause" class="btn">▶️</button>
+          <label class="file-label">
+            Subir pista
+            <input id="audioFile" type="file" accept="audio/*" />
+          </label>
+          <label class="file-label">
+            Subir letra (.txt)
+            <input id="lyricsFile" type="file" accept=".txt" />
+          </label>
+          <button id="expandPlayer" class="btn">🔍</button>
+          <a id="downloadLink" class="btn" href="#" download="pista.mp3">⬇️ Descargar</a>
+        </div>
+
+        <div id="expandedControls" class="expanded hidden">
+          <label>Volumen
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" />
+          </label>
+          <label>Progreso
+            <input id="seek" type="range" min="0" max="100" value="0" />
+          </label>
+          <button id="toggleLyrics" class="btn">📝 Ver letra</button>
+        </div>
+
+        <div id="lyricsPanel" class="lyrics hidden" aria-hidden="true">
+          <pre id="lyricsText">Letra por defecto: Te amo. Reemplaza con tu letra o sube un .txt.</pre>
+          <a id="downloadLyrics" class="btn" href="#" download="letra.txt">⬇️ Descargar letra</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="counter-area">
+      <h3>Tiempo juntos</h3>
+      <div class="counter" id="counter" aria-live="polite">
+        <span id="years">0</span> años,
+        <span id="months">0</span> meses,
+        <span id="days">0</span> días,
+        <span id="hours">00</span>:
+        <span id="minutes">00</span>:
+        <span id="seconds">00</span>
+      </div>
+      <small>Desde el 15 de julio de 2026</small>
+    </section>
+
+    <footer>
+      <p class="credits">PWA — Hecho con ❤</p>
+    </footer>
+  </main>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

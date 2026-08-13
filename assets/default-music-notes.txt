@@ -1,0 +1,2 @@
+Incluye aquí tu archivo de audio por defecto con el nombre: assets/default-music.mp3
+(No subí el binario en esta vista previa; el script genera un audio por defecto si no encuentra el archivo en el servidor.)
