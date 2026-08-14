@@ -77,8 +77,28 @@ h2{
   cursor:pointer;
   transition: transform .26s ease, box-shadow .26s ease;
   border:1px solid rgba(0,0,0,0.04);
+  perspective: 800px;
 }
 .envelope:hover{ transform: translateY(-6px) rotate(-1deg); box-shadow: 0 14px 34px rgba(20,20,20,0.08); }
+
+/* flap that rotates up */
+.flap{
+  position:absolute;
+  left:8px;
+  right:8px;
+  top:8px;
+  height:48%;
+  background: linear-gradient(180deg,var(--accent-2),var(--accent));
+  border-radius:8px;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform .72s cubic-bezier(.18,.9,.32,1), opacity .28s;
+  z-index:2;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+.envelope.open .flap{ transform: rotateX(170deg) translateY(-6px); opacity:0.98; }
+
+.body{ padding-top:6px; z-index:1; }
 
 .seal{
   width:44px;
@@ -157,6 +177,18 @@ input[type="file"]{ font-size: 0.95rem; color:var(--muted); }
   border:4px solid var(--accent-2);
   box-shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
+
+/* Letter reveal animation */
+.letter{
+  transition: opacity .36s ease, transform .36s ease, max-height .36s ease;
+  opacity:1;
+  transform: translateY(0);
+  max-height:1000px;
+  margin-top:12px;
+}
+.letter.hidden{ opacity:0; transform: translateY(8px); max-height:0; overflow:hidden; pointer-events:none; }
+
+.envelope.open ~ .letter{ opacity:1; transform: translateY(0); max-height:1000px; pointer-events:auto; }
 
 .progress-wrap{ display:flex; gap:10px; align-items:center; color:var(--muted); font-size:0.95rem; }
 

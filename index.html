@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Nuestra Carta — Romance PWA</title>
   <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <!-- Tipografías y estilos pastel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css" />
   <meta name="theme-color" content="#ffe6f0" />
 </head>
 <body>
   <main class="container">
     <header>
       <h1>Nuestra Carta</h1>
-      <p class="subtitle">Haz clic en el sello para abrir el sobre y leer la carta.</p>
+      <p class="subtitle lead">Haz clic en el sello para abrir el sobre y leer la carta.</p>
     </header>
 
     <section class="envelope-area">
@@ -31,7 +33,7 @@
           </p>
 
         </div>
-        <button class="close-letter" id="closeLetter">Cerrar</button>
+        <button class="close-letter btn secondary" id="closeLetter">Cerrar</button>
       </article>
     </section>
 
@@ -89,6 +91,37 @@
       <p class="credits">PWA — Hecho con ❤</p>
     </footer>
   </main>
+
+  <!-- Animación del sobre: abre al hacer click en el sello -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const envelope = document.getElementById('envelope');
+      const seal = document.getElementById('seal');
+      const flap = document.getElementById('flap');
+      const letter = document.getElementById('letter');
+      const close = document.getElementById('closeLetter');
+
+      function openEnvelope(){
+        envelope.classList.add('open');
+        letter.classList.remove('hidden');
+        letter.setAttribute('aria-hidden','false');
+        seal.setAttribute('aria-pressed','true');
+      }
+      function closeEnvelope(){
+        envelope.classList.remove('open');
+        letter.classList.add('hidden');
+        letter.setAttribute('aria-hidden','true');
+        seal.setAttribute('aria-pressed','false');
+      }
+
+      seal.addEventListener('click', openEnvelope);
+      seal.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openEnvelope(); }});
+      close && close.addEventListener('click', closeEnvelope);
+
+      // allow clicking the flap to also open
+      flap && flap.addEventListener('click', openEnvelope);
+    });
+  </script>
 
   <script src="/js/app.js"></script>
 </body>
