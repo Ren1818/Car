@@ -1,0 +1,180 @@
+/* name=assets/styles.css */
+/* Pastel theme for Romance PWA */
+:root{
+  --bg1: #fffafc; /* very pale pink */
+  --bg2: #fbfffe; /* very pale mint */
+  --accent: #f7c6d9; /* pastel pink */
+  --accent-2: #cfc3ff; /* pastel lavender */
+  --accent-3: #bff1da; /* pastel mint */
+  --muted: #6b6b6b;
+  --card: #ffffff;
+  --glass: rgba(255,255,255,0.6);
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(15,15,15,0.06);
+  --bold: 700;
+  --max-width: 920px;
+}
+
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#222;
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  padding:22px 14px;
+}
+
+.container{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 18px;
+}
+
+h1{
+  font-family: "Merriweather", serif;
+  font-weight: var(--bold);
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  margin: 6px 0 14px;
+  color: #2a2a2a;
+  letter-spacing: -0.02em;
+}
+
+h2{
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 20px 0 8px;
+  color:#2a2a2a;
+}
+
+.lead{
+  color:var(--muted);
+  font-size: 1rem;
+  margin-bottom: 14px;
+}
+
+.envelope-wrap{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+.envelope{
+  width:116px;
+  height:86px;
+  background: linear-gradient(180deg,#fff,#fff6fb);
+  border-radius:10px;
+  box-shadow: var(--shadow);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: transform .26s ease, box-shadow .26s ease;
+  border:1px solid rgba(0,0,0,0.04);
+}
+.envelope:hover{ transform: translateY(-6px) rotate(-1deg); box-shadow: 0 14px 34px rgba(20,20,20,0.08); }
+
+.seal{
+  width:44px;
+  height:44px;
+  background: linear-gradient(180deg,var(--accent),var(--accent-2));
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:600;
+  box-shadow: 0 8px 18px rgba(199,145,189,0.18);
+  transition: transform .18s ease;
+}
+.envelope:active .seal{ transform: scale(.94) rotate(-6deg); }
+
+.card{
+  flex:1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.86));
+  border-radius: var(--radius);
+  padding:14px 16px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(0,0,0,0.03);
+}
+.card .card-title{ font-family: "Merriweather", serif; font-size:1.35rem; margin:6px 0 10px; }
+.card p{ margin:0 0 12px; color:#333; }
+
+.btn{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  background:var(--accent-3);
+  color:#063; /* dark-ish for contrast */
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow: 0 8px 20px rgba(151,209,186,0.12);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--accent-2);
+  border:1px solid rgba(207,195,255,0.12);
+  box-shadow:none;
+}
+.btn:active{ transform: translateY(1px) scale(.996); }
+
+.input-file{ display:inline-block; margin:6px 0; }
+input[type="file"]{ font-size: 0.95rem; color:var(--muted); }
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-top:8px;
+}
+.range{
+  -webkit-appearance:none;
+  appearance:none;
+  height:8px;
+  background: linear-gradient(90deg,var(--accent-2) 30%, #e7e7e7 0);
+  border-radius:8px;
+  outline:none;
+  width:220px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background: #fff;
+  border:4px solid var(--accent-2);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.progress-wrap{ display:flex; gap:10px; align-items:center; color:var(--muted); font-size:0.95rem; }
+
+a.download{ display:inline-flex; align-items:center; gap:6px; color:var(--accent); text-decoration:none; font-weight:600; }
+
+.footer{ margin-top:22px; color:var(--muted); font-size:0.95rem; padding-top:16px; border-top:1px dashed rgba(0,0,0,0.04); }
+
+@media (max-width:560px){
+  .envelope-wrap{ flex-direction:column; align-items:center; }
+  .card{ width:100%; }
+  .range{ width:160px; }
+}
+
+.pastel-note{
+  background: linear-gradient(90deg, rgba(247,198,217,0.08), rgba(207,195,255,0.06));
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(207,195,255,0.06);
+  color:#4b4b4b;
+  font-size:0.95rem;
+}
