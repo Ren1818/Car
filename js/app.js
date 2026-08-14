@@ -187,6 +187,28 @@ function writeString(view, offset, string){
   }
 })();
 
+// Auto-cargar letra del servidor si existe (assets/entre-el-juego-y-la-vida.txt)
+(async function loadServerLyrics(){
+  try{
+    const resp = await fetch('/assets/entre-el-juego-y-la-vida.txt');
+    if(resp.ok){
+      const text = await resp.text();
+      lyricsText.textContent = text;
+      // create downloadable blob for the lyrics
+      const blob = new Blob([text], {type:'text/plain'});
+      if(lyricsObjectURL) URL.revokeObjectURL(lyricsObjectURL);
+      lyricsObjectURL = URL.createObjectURL(blob);
+      downloadLyrics.href = lyricsObjectURL;
+      downloadLyrics.download = 'entre-el-juego-y-la-vida.txt';
+      lyricsPanel.classList.remove('hidden');
+      lyricsPanel.setAttribute('aria-hidden','false');
+    }
+  }catch(e){
+    // ignore if file not present or network error
+    // console.debug('No server lyrics found', e);
+  }
+})();
+
 // COUNTER: tiempo desde 15 de julio de 2026
 const startDate = new Date('2026-07-15T00:00:00Z'); // UTC
 const yearsEl = document.getElementById('years');
