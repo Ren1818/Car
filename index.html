@@ -88,16 +88,127 @@
 
 <div id="notepadScreen" class="screen">
   <div class="notepad">
-    <a href="carta.html" class="nav-button">Mirar</a>
+    <!-- Contenedor del slider -->
+    <div class="slider-container" id="sliderContainer">
+      <div class="slider-track-text">Desliza para mirar</div>
+      <div class="nav-button-slider" id="sliderHandle">Mirar</div>
+    </div>
   </div>
 </div>
 
 <style>
-  .nav-button {
+  /* Contenedor que sirve de pista */
+  .slider-container {
+    position: relative;
+    width: 220px;
+    height: 44px;
+    background-color: #fce4ec; /* Fondo suave para la pista */
+    border-radius: 25px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Texto indicador dentro de la pista */
+  .slider-track-text {
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: bold;
+    pointer-events: none;
+  }
+
+  /* Botón con tus colores y estilos base */
+  .nav-button-slider {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    bottom: 2px;
+    padding: 10px 20px;
+    background-color: #eb5dab; /* Tu color principal */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 22px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    touch-action: none;
+  }
+
+  /* Cambio de color al interactuar */
+  .nav-button-slider:hover,
+  .nav-button-slider:active {
+    background-color: #ec1894; /* Tu color hover */
+  }
+</style>
+
+<script>
+  const handle = document.getElementById('sliderHandle');
+  const container = document.getElementById('sliderContainer');
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+
+  const getClientX = (e) => e.touches ? e.touches[0].clientX : e.clientX;
+
+  const startDrag = (e) => {
+    isDragging = true;
+    startX = getClientX(e) - handle.offsetLeft;
+    handle.style.cursor = 'grabbing';
+    handle.style.transition = 'none';
+  };
+
+  const onDrag = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    
+    const x = getClientX(e) - startX;
+    const maxLeft = container.clientWidth - handle.clientWidth - 4;
+
+    currentX = Math.max(2, Math.min(x, maxLeft));
+    handle.style.left = `${currentX}px`;
+
+    // Si llega al final (al menos 90% del recorrido), redirige a la página
+    if (currentX >= maxLeft * 0.95) {
+      isDragging = false;
+      window.location.href = 'carta.html';
+    }
+  };
+
+  const stopDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    handle.style.cursor = 'grab';
+    handle.style.transition = 'left 0.3s ease';
+    handle.style.left = '2px'; // Regresa al inicio si no se completó el deslizamiento
+  };
+
+  // Eventos para Mouse
+  handle.addEventListener('mousedown', startDrag);
+  window.addEventListener('mousemove', onDrag);
+  window.addEventListener('mouseup', stopDrag);
+
+  // Eventos para Pantallas Táctiles (Móviles)
+  handle.addEventListener('touchstart', startDrag);
+  window.addEventListener('touchmove', onDrag);
+  window.addEventListener('touchend', stopDrag);
+</script>
+
+
+<style> 
+  /*.nav-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #eb5dab; /* Color para combinar con tu diseño */
-    color: #ffffff;
+    /*color: #ffffff;
     text-decoration: none;
     margin: 0px auto;
     text-align: center;
@@ -107,12 +218,12 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+*/
 /* Efecto al pasar el cursor */
-.nav-button:hover {
+/*.nav-button:hover {
     background-color: #ec1894;
     transform: translateY(-2px);
-}
+} */
 .lyrics-container {
     max-width: 500px;
     margin: 0px auto;
