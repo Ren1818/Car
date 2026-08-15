@@ -12,7 +12,11 @@ body {
 }
 /*estilo botn movile*/
 .nav-button {
-    display: inline-block;
+  position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    /*display: inline-block;*/
     padding: 10px 20px;
     background-color: #e60026; /* Color para combinar con tu diseño */
     color: #ffffff;
